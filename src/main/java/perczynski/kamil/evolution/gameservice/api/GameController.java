@@ -1,6 +1,7 @@
 package perczynski.kamil.evolution.gameservice.api;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import perczynski.kamil.evolution.gameservice.domain.GameService;
 import perczynski.kamil.evolution.gameservice.domain.Player;
@@ -11,6 +12,7 @@ import perczynski.kamil.evolution.gameservice.libs.Money;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @SuppressWarnings("unused")
@@ -38,6 +40,7 @@ public class GameController {
 
     @GetMapping("/players/{playerId}")
     public Player readPlayer(@PathVariable String playerId) {
+        log.debug("Reading player with id: {}", playerId);
         return playerRepository.find(playerId);
     }
 
