@@ -1,0 +1,7 @@
+logging.level:
+  perczynski.kamil: debug
+
+game-round:
+  small-win-multiplier: 3
+  medium-win-multiplier: 10
+  big-win-multiplier: 50
