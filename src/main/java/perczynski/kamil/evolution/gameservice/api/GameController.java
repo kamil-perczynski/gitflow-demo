@@ -1,10 +1,8 @@
 package perczynski.kamil.evolution.gameservice.api;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 import perczynski.kamil.evolution.gameservice.domain.GameService;
 import perczynski.kamil.evolution.gameservice.domain.Player;
 import perczynski.kamil.evolution.gameservice.domain.PlayerRepository;
@@ -14,6 +12,7 @@ import perczynski.kamil.evolution.gameservice.libs.Money;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @SuppressWarnings("unused")
@@ -37,6 +36,12 @@ public class GameController {
                         .stake(new Money(placeBetRequest.stake()))
                         .build()
         );
+    }
+
+    @GetMapping("/players/{playerId}")
+    public Player readPlayer(@PathVariable String playerId) {
+        log.debug("Reading player with id: {}", playerId);
+        return playerRepository.find(playerId);
     }
 
 }
