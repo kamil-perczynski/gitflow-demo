@@ -8,6 +8,8 @@ import perczynski.kamil.evolution.gameservice.domain.Player;
 import perczynski.kamil.evolution.gameservice.domain.PlayerRepository;
 import perczynski.kamil.evolution.gameservice.domain.bets.Bet;
 import perczynski.kamil.evolution.gameservice.domain.bets.GameRound;
+import perczynski.kamil.evolution.gameservice.domain.rounds.GameRoundListing;
+import perczynski.kamil.evolution.gameservice.domain.rounds.GameRoundService;
 import perczynski.kamil.evolution.gameservice.libs.Money;
 
 import javax.validation.Valid;
@@ -20,6 +22,7 @@ public class GameController {
 
     private final GameService gameService;
     private final PlayerRepository playerRepository;
+    private GameRoundService gameRoundService;
 
     @PostMapping("/players")
     public Player registerPlayer() {
@@ -36,6 +39,12 @@ public class GameController {
                         .stake(new Money(placeBetRequest.stake()))
                         .build()
         );
+    }
+
+    @GetMapping("/game-rounds")
+    public GameRoundListing listRounds(@RequestParam String playerId) {
+        log.debug("Listing game rounds for player: {}", playerId);
+        return gameRoundService.listGameRounds(playerId);
     }
 
     @GetMapping("/players/{playerId}")
