@@ -1,6 +1,7 @@
 package perczynski.kamil.evolution.gameservice.api;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import perczynski.kamil.evolution.gameservice.domain.GameService;
 import perczynski.kamil.evolution.gameservice.domain.Player;
@@ -13,6 +14,7 @@ import perczynski.kamil.evolution.gameservice.libs.Money;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @SuppressWarnings("unused")
@@ -41,6 +43,7 @@ public class GameController {
 
     @GetMapping("/game-rounds")
     public GameRoundListing listRounds(@RequestParam String playerId) {
+        log.debug("Listing game rounds for player: {}", playerId);
         return gameRoundService.listGameRounds(playerId);
     }
 
