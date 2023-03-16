@@ -3,9 +3,9 @@ package perczynski.kamil.evolution.gameservice.domain.rounds;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import perczynski.kamil.evolution.gameservice.domain.bets.GameRound;
 import perczynski.kamil.evolution.gameservice.domain.Player;
 import perczynski.kamil.evolution.gameservice.domain.PlayerRepository;
-import perczynski.kamil.evolution.gameservice.domain.bets.GameRound;
 
 import java.util.List;
 
@@ -14,8 +14,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GameRoundService {
 
+    private final GameRoundRepository gameRoundRepository;
     private final PlayerRepository playerRepository;
     private final GameRoundRepository gameRoundRepository;
+
+    public GameRound readGameRound(String roundId) {
+        log.info("Reading game round: {}", roundId);
+        return gameRoundRepository.find(roundId);
+    }
 
     public GameRoundListing listGameRounds(String playerId) {
         log.info("Listing game rounds for player: {}", playerId);
