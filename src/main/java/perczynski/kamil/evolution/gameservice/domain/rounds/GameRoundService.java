@@ -16,7 +16,6 @@ public class GameRoundService {
 
     private final GameRoundRepository gameRoundRepository;
     private final PlayerRepository playerRepository;
-    private final GameRoundRepository gameRoundRepository;
 
     public GameRound readGameRound(String roundId) {
         log.info("Reading game round: {}", roundId);
