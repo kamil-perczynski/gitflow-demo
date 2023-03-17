@@ -22,7 +22,7 @@ public class GameController {
 
     private final GameService gameService;
     private final PlayerRepository playerRepository;
-    private GameRoundService gameRoundService;
+    private final GameRoundService gameRoundService;
 
     @PostMapping("/players")
     public Player registerPlayer() {
@@ -45,6 +45,12 @@ public class GameController {
     public GameRoundListing listRounds(@RequestParam String playerId) {
         log.debug("Listing game rounds for player: {}", playerId);
         return gameRoundService.listGameRounds(playerId);
+    }
+    
+    @GetMapping("/players/{playerId}")
+    public Player readPlayer(@PathVariable String playerId) {
+        log.debug("Reading player with id: {}", playerId);
+        return playerRepository.find(playerId);
     }
 
 }
