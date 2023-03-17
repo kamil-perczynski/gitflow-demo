@@ -41,6 +41,12 @@ public class GameController {
         );
     }
 
+    @GetMapping("/game-rounds/{roundId}")
+    public GameRound readGameRound(@PathVariable String roundId) {
+        log.debug("Reading game round by id: {}", roundId);
+        return gameRoundService.readGameRound(roundId);
+    }
+
     @GetMapping("/game-rounds")
     public GameRoundListing listRounds(@RequestParam String playerId) {
         log.debug("Listing game rounds for player: {}", playerId);
