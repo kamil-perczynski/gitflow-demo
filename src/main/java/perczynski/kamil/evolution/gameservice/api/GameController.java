@@ -41,6 +41,12 @@ public class GameController {
         );
     }
 
+    @GetMapping("/players/{playerId}")
+    public Player readPlayer(@PathVariable String playerId) {
+        log.debug("Reading player with id: {}", playerId);
+        return playerRepository.find(playerId);
+    }
+
     @GetMapping("/game-rounds/{roundId}")
     public GameRound readGameRound(@PathVariable String roundId) {
         log.debug("Reading game round by id: {}", roundId);
