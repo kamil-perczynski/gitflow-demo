@@ -8,6 +8,7 @@ import perczynski.kamil.evolution.gameservice.domain.Player;
 import perczynski.kamil.evolution.gameservice.domain.PlayerRepository;
 import perczynski.kamil.evolution.gameservice.domain.bets.Bet;
 import perczynski.kamil.evolution.gameservice.domain.bets.GameRound;
+import perczynski.kamil.evolution.gameservice.domain.rounds.GameRoundListing;
 import perczynski.kamil.evolution.gameservice.domain.rounds.GameRoundService;
 import perczynski.kamil.evolution.gameservice.libs.Money;
 
@@ -44,6 +45,18 @@ public class GameController {
     public GameRound readGameRound(@PathVariable String roundId) {
         log.debug("Reading game round by id: {}", roundId);
         return gameRoundService.readGameRound(roundId);
+    }
+
+    @GetMapping("/game-rounds")
+    public GameRoundListing listRounds(@RequestParam String playerId) {
+        log.debug("Listing game rounds for player: {}", playerId);
+        return gameRoundService.listGameRounds(playerId);
+    }
+    
+    @GetMapping("/players/{playerId}")
+    public Player readPlayer(@PathVariable String playerId) {
+        log.debug("Reading player with id: {}", playerId);
+        return playerRepository.find(playerId);
     }
 
 }
